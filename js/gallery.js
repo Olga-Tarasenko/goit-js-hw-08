@@ -90,8 +90,11 @@ function createMarkup(arr) {
 function handlerClick(event) {
   event.preventDefault();
 
-  const product = event.target.closest(".gallery-image");
-  const imgDataset = product.dataset.source;
+  if (event.target.nodeName !== "IMG") {
+    return;
+  }
+
+  const imgDataset = event.target.dataset.source;
   const imgOriginal = images.find((item) => item.original === imgDataset);
 
   const instance = basicLightbox.create(`
